@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "server-start": "open-api-mocker -s server/enterprise-attack.json -p 1234 -w"
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.2.4",

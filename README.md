@@ -11,8 +11,14 @@ An application that organizes and displays the tactics, techniques, and subtechn
 ## JSON data
 https://github.com/mitre/cti/blob/master/enterprise-attack/enterprise-attack.json
 
-## Figma Output
-https://www.figma.com/proto/526imlMQDt7KkcfgAeKcd5/DEAS---AI-SOC-FW?page-id=0%3A1&node-id=977-49407&viewport=-9649%2C-10203%2C0.3&t=l5l2apWZhioSA6RT-1&scaling=scale-down&starting-point-node-id=722%3A60720
+## Open API Mocker
+
+To install the `open-api-mocker` package globally, run the following command:
+```npm i -g open-api-mocker```
+
+## Open API Start Mock Server
+To start the mock server run the `server-start` script:
+```npm run server start```
 
 
 # React + TypeScript + Vite
