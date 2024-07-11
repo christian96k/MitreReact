@@ -1,3 +1,8 @@
 .hub-deas{
     margin: 0;
+    &__avatar{
+        width: 4rem;
+        height: 4rem;
+        border-radius: 100%;
+    }
 }

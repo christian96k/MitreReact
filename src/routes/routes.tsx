@@ -23,11 +23,6 @@ export const router = createBrowserRouter([
     path: ROUTES.LOGIN_SYSTEM,
     element: <LoginSystem/>
   },
-
-  // Necessary Auth-0 Callback
-  {
-    path: ROUTES.AUTH0,
-    element: <Hub/>
-  },
+  
 ]);
 

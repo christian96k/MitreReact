@@ -16,6 +16,6 @@ export const auth0Providers = {
      * The redirect URI after authentication.
      * @type {string}
      */
-    redirect_uri: 'oauth/callback',
+    redirect_uri: 'hub',
   }
 };

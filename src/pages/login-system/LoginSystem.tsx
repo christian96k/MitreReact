@@ -1,8 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import "./LoginSystem.scss";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect } from "react";
-import Loader from "../../components/loader/Loader";
-
+import Loader from "../../shared/components/loader/Loader";
 
 
 function LoginSystemComponent(): JSX.Element {
@@ -11,7 +12,7 @@ function LoginSystemComponent(): JSX.Element {
   useEffect(() => {
     console.log('running login:::')
     loginWithRedirect();
-  }, [loginWithRedirect]);
+  }, []);
 
   return (
     <main className="user-login-system row justify-content-center align-items-center vh-100 container-fluid">
