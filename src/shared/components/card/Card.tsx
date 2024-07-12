@@ -1,4 +1,4 @@
-import { CardProps } from "../../models/Card.model";
+import { CardProps } from "../models/Card.model";
 import "./Card.scss";
 
 const Card: React.FC<CardProps> = ({header, footer}) => {

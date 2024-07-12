@@ -2,8 +2,13 @@
 import "./Hub.scss";
 import Loader from "../../shared/components/loader/Loader";
 import useUser from "../../custom-hooks/useUser";
-import { CardAction, CardIcon, CardProps } from "../../shared/models/Card.model";
+import { CardAction, CardIcon, CardProps } from "../../shared/components/models/Card.model";
 import Card from "../../shared/components/card/Card";
+import { useEffect, useState } from "react";
+import { useHubFacade } from "./store/Hub.facade";
+import { HackerType } from "../../shared/constants/groupHackers.model";
+import { ExtendedMitreAttackInfo } from "./models/Hub.model";
+
 
 
 const cardsMock: CardProps[] = [
@@ -33,7 +38,16 @@ const onCardAction = (cardAction:CardAction) =>{
 }
 
 function Hub() {
-  const { user, onLogout} = useUser()
+  const { user, onLogout} = useUser();
+  const [mitreData, setMitreData] = useState<ExtendedMitreAttackInfo[] | null>(null);
+  const hubFacade = useHubFacade();
+
+
+  useEffect(()=>{
+    hubFacade.startGetMitreData(HackerType.APT28);
+    setMitreData([])
+  },[])
+
 
     return (
       <>
@@ -43,6 +57,15 @@ function Hub() {
           <button className="btn btn-secondary" onClick={() => onLogout()}>
           {'Log Out'}
           </button>
+
+          <section className="my-4">
+            <pre>
+              <code>
+                {JSON.stringify(mitreData)}
+              </code>
+            </pre>
+
+          </section>
 
           <section className="hub-deas__cards my-4">
 

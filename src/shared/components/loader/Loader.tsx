@@ -1,6 +1,6 @@
 import React from "react";
 import "./Loader.scss";
-import { LoaderProps } from "../../models/Loader.model";
+import { LoaderProps } from "../models/Loader.model";
 
 
 const Loader: React.FC<LoaderProps> = ({ loaderTitle = '' }) => {
