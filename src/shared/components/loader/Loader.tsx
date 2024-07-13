@@ -1,9 +1,9 @@
 import React from "react";
 import "./Loader.scss";
-import { LoaderProps } from "../models/Loader.model";
+import { LoaderConfig } from "../models/Loader.model";
 
 
-const Loader: React.FC<LoaderProps> = ({ loaderTitle = '' }) => {
+const Loader: React.FC<LoaderConfig> = ({ loaderTitle = '' }) => {
   return (
     <section className="w-100 h-100 d-flex justify-content-center align-items-center">
       { loaderTitle ? 

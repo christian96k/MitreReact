@@ -6,7 +6,45 @@ export enum HackerType  {
 
 
 
-export const HackersMock = {
+// Demo mock --- demonstrating data to allow dynamic info hack group works
+
+interface Chip {
+  label: string;
+  isDark?: boolean;
+  class?: string;
+}
+
+interface AliasContent {
+  size: string;
+  class?: string;
+  chips: Chip[];
+}
+
+interface AliasHeader {
+  label: string;
+  size: string;
+}
+
+interface Aliases {
+  header: AliasHeader[];
+  content: AliasContent[];
+}
+
+interface Hacker {
+  title: string;
+  name: string;
+  external_id: string;
+  aliases: Aliases;
+  description: string;
+  link: string;
+  ipAdresss: string;
+}
+
+export type HackersMockType = {
+  [key in HackerType]: Hacker;
+};
+
+export const HackersMock: HackersMockType = {
   [HackerType.APT28] : {
     title: 'Mitre Attack',
     name: 'APT28',
@@ -80,7 +118,6 @@ export const HackersMock = {
     link: 'https://attack.mitre.org/groups/G0007/',
     ipAdresss: '139.5.177.205'
   },
-
   [HackerType.APT29]: {
     title: 'Mitre Attack',
     name: 'APT29',
@@ -154,7 +191,7 @@ export const HackersMock = {
     link: 'https://attack.mitre.org/groups/G0007/',
     ipAdresss: '139.5.177.205'
   },
- [HackerType.GENERIC]:{
+  [HackerType.GENERIC]:{
     title: 'Mitre Attack',
     name: 'GENERIC',
     external_id: 'G0000',
@@ -229,4 +266,3 @@ export const HackersMock = {
   }
 }
 
-// mock data

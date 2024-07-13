@@ -1,4 +1,4 @@
-export interface LoaderProps {
+export interface LoaderConfig {
     loaderTitle?: string;
 }
   

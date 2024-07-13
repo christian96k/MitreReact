@@ -2,80 +2,72 @@
 import "./Hub.scss";
 import Loader from "../../shared/components/loader/Loader";
 import useUser from "../../custom-hooks/useUser";
-import { CardAction, CardIcon, CardProps } from "../../shared/components/models/Card.model";
-import Card from "../../shared/components/card/Card";
 import { useEffect, useState } from "react";
 import { useHubFacade } from "./store/Hub.facade";
-import { HackerType } from "../../shared/constants/groupHackers.model";
+import { HackersMock, HackerType } from "../../shared/constants/groupHackers.model";
+import MitreAttack from "./mitre-attack/Mitre-attack";
 import { ExtendedMitreAttackInfo } from "./models/Hub.model";
+import useMitreConfig from "../../custom-hooks/userMitreConfig";
+import { ClusterConfig } from "../../shared/components/models/Cluster.model";
+import { CardConfig } from "../../shared/components/models/Card.model";
 
 
 
-const cardsMock: CardProps[] = [
-  {
-    header:{
-      label: 'Card 1',
-      value: 'Card value placehodler text',
-      class: 'string',
-    },
-    footer:[
-      {
-        icon: CardIcon.info,
-        actionType: CardAction.INFO,
-        action: (cardAction:CardAction) => onCardAction(cardAction)
-      },
-      {
-        icon: CardIcon.settings,
-        actionType: CardAction.SETTINGS,
-        action: (cardAction:CardAction) => onCardAction(cardAction)
-      },
-    ]
-  }
-]
+// const onCardAction = (cardAction:CardAction) =>{
+//   console.log("card_action:::", cardAction)
+// }
 
-const onCardAction = (cardAction:CardAction) =>{
-  console.log("card_action:::", cardAction)
-}
+const selectMitreCluster = (cluster: ClusterConfig) =>{
+  console.log('selected cluster:::', cluster)
+};
 
 function Hub() {
   const { user, onLogout} = useUser();
-  const [mitreData, setMitreData] = useState<ExtendedMitreAttackInfo[] | null>(null);
-  const hubFacade = useHubFacade();
-
+  const { mitreData$, startGetMitreData } = useHubFacade();
+  const { createMitreCluster } = useMitreConfig();
+  const [cardsTechnique, setCardsTechnique] = useState<CardConfig[]>([]);
+  
+  useEffect(() => {
+    startGetMitreData(HackerType.APT28); 
+  }, []);
 
   useEffect(()=>{
-    hubFacade.startGetMitreData(HackerType.APT28);
-    setMitreData([])
-  },[])
-
+    console.log('generate cards:::')
+    setCardsTechnique([])
+  },[mitreData$])
 
     return (
       <>
         <main className="hub-deas dashboard-padding">
-          { user ? <img loading="lazy" src={user.picture} /> : <Loader/>}
-          <h4 className="text-center">{'Hub deas demo'} </h4>
-          <button className="btn btn-secondary" onClick={() => onLogout()}>
-          {'Log Out'}
-          </button>
 
-          <section className="my-4">
-            <pre>
-              <code>
-                {JSON.stringify(mitreData)}
-              </code>
-            </pre>
+          <section className="hub-deas__user-info">
 
+            { user ? <img loading="lazy" src={user.picture} /> : <Loader/>}
+          
+            <button className="btn btn-secondary d-block-inline mx-2" onClick={() => onLogout()}>
+              {'Log Out'}
+            </button>
           </section>
 
-          <section className="hub-deas__cards my-4">
+          { mitreData$ ?
+            <section className="hub-deas__mitre-attack my-4">
+              <MitreAttack {
+                ...{
+                  mitreDataFiltered: mitreData$,
+                  hackerType: HackerType.APT28,
+                  cards: cardsTechnique,
+                  clusters: mitreData$.map(
+                    (mitreAttackInfo: ExtendedMitreAttackInfo) => createMitreCluster(mitreAttackInfo,selectMitreCluster)
+                  ),
+                  attackHacker: HackersMock,
+                  mitreFilters: false 
+                }
+              }/>
 
-            {cardsMock.length ? 
-              cardsMock.map((card, index)=>
-                <Card key={index} {...card}/>
-              )
-              : null
-            }
-          </section>
+            </section>
+            :
+            <Loader/>
+          }
 
         </main>
       </>

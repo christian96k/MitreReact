@@ -1,4 +1,4 @@
-export interface CardProps {
+export interface CardConfig {
   header: CardHeader;
   footer: CardFooter[];
 }

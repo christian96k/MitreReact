@@ -1,7 +1,7 @@
-import { CardProps } from "../models/Card.model";
+import { CardConfig } from "../models/Card.model";
 import "./Card.scss";
 
-const Card: React.FC<CardProps> = ({header, footer}) => {
+const Card: React.FC<CardConfig> = ({header, footer}) => {
     return (
         <div  className="card-deas caption p-0 h-100 justify-content-between">
 
