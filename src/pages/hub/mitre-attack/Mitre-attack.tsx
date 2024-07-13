@@ -72,11 +72,9 @@ const  MitreAttack:React.FC<MitreAttackConfig> = (mitreAttackConfig:MitreAttackC
 
                     { mitreAttackConfig.clusters.length > 0 && 
                         <div className="mitre-attack__footer__phase__clusters p-3">
-                            {mitreAttackConfig.clusters.map((cluster, index)=>{
-                                return(
-                                    <Cluster key={`${cluster.id}_${index}`} {...cluster}></Cluster>
-                                )
-                            })}
+                            { mitreAttackConfig.clusters.map((cluster, index) => 
+                                <Cluster key={`${cluster.id}_${index}`} {...cluster}></Cluster>
+                            )}
 
                         </div>
                     }
@@ -92,13 +90,9 @@ const  MitreAttack:React.FC<MitreAttackConfig> = (mitreAttackConfig:MitreAttackC
                     {  mitreAttackConfig.cards && 
 
                         <div className="mitre-attack__footer__techniques__cards p-3" >
-                            { mitreAttackConfig.cards.map((card, index) => {
-                                return(
-                                    <>
-                                        <Card key={index} {...card}/>
-                                    </>
-                                )
-                            }) }
+                            { mitreAttackConfig.cards.map((card, index) => 
+                                <Card key={`${card.header.value}-${index}`} {...card}/>
+                            )}
                         </div>
                     
                     }

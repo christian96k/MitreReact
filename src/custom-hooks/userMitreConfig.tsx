@@ -21,7 +21,7 @@ const useMitreConfig = () => {
     };
   };
 
-  const createMitreTechniques = (mitreAttackInfo: ExtendedMitreAttackInfo, openMitreModal: (actionType: CardAction) => void): CardConfig => {
+  const createMitreTechniques = (mitreAttackInfo: ExtendedMitreAttackInfo): CardConfig => {
     return {
       header: {
         label: mitreAttackInfo.name,
@@ -31,12 +31,12 @@ const useMitreConfig = () => {
         {
           icon: CardIcon.info,
           actionType: CardAction.INFO,
-          action: openMitreModal,
+          action: ()=> null,
         },
         {
           icon: CardIcon.settings,
           actionType: CardAction.SETTINGS,
-          action: openMitreModal,
+          action: ()=> null,
         }
       ]
     };
@@ -55,7 +55,7 @@ const useMitreConfig = () => {
             { label: 'Descrizione', value: mitreAttackInfo.description },
             { label: 'Uses Example', value: mitreAttackInfo?.uses ? mitreAttackInfo?.uses[0]?.description : 'N/A' }
           ],
-          cards: mitreAttackInfo?.subtechniques ? mitreAttackInfo.subtechniques.map((subtechnique:ExtendedMitreAttackInfo) => createMitreTechniques(subtechnique, () => {})) : []
+          cards: mitreAttackInfo?.subtechniques ? mitreAttackInfo.subtechniques.map((subtechnique:ExtendedMitreAttackInfo) => createMitreTechniques(subtechnique)) : []
         };
         break;
       default:
