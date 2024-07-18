@@ -4,7 +4,6 @@ import { HackersMockType, HackerType } from "../../../../shared/constants/groupH
 import { ExtendedMitreAttackInfo } from "../../models/Hub.model";
 
 export interface MitreAttackConfig {
-  mitreDataFiltered: ExtendedMitreAttackInfo[]
   hackerType:HackerType;
   mitreFilters: boolean;
   attackHacker: HackersMockType;
@@ -12,3 +11,6 @@ export interface MitreAttackConfig {
   cards: CardConfig[];
 }
   
+export interface MitreAttackProps {
+  mitreData: ExtendedMitreAttackInfo[];
+}

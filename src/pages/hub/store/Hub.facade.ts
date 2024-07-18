@@ -7,6 +7,8 @@ export function useHubFacade() {
   const dispatch = useDispatch();
 
   const mitreData$ = useSelector((state: RootState) => state.hub.data);
+  const loading$ = useSelector((state: RootState) => state.hub.loading);
+
 
   const startGetMitreData = (filter: HackerType) => {
     dispatch(getMitreData({ filter }));
@@ -14,6 +16,7 @@ export function useHubFacade() {
 
   return {
     mitreData$,
+    loading$,
     startGetMitreData,
   };
 }
